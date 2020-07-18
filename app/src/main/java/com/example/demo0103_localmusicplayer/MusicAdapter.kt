@@ -5,14 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jean.jcplayer.model.JcAudio
 import kotlinx.android.synthetic.main.item_layout.view.*
 
-class MusicAdapter(private val musicList: List<MusicItem>,
+class MusicAdapter(private val musicList: List<JcAudio>,
                    private  val itemClickListener: OnItemClickListener)
                                 :RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
 
     interface OnItemClickListener{
-        fun onItemClick(item: MusicItem)
+        fun onItemClick(item: JcAudio)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
@@ -24,7 +25,7 @@ class MusicAdapter(private val musicList: List<MusicItem>,
 
         val currentItem = musicList[position]
 
-        holder.textView.text = currentItem.musicName
+        holder.textView.text = currentItem.title
 
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(currentItem)
