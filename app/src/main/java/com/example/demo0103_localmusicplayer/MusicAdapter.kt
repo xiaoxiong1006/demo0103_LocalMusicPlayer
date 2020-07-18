@@ -7,7 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_layout.view.*
 
-class MusicAdapter(private val musicList: List<MusicItem>):RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
+class MusicAdapter(private val musicList: List<MusicItem>,
+                   private  val itemClickListener: OnItemClickListener)
+                                :RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
+
+    interface OnItemClickListener{
+        fun onItemClick(item: MusicItem)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout,parent,false)
@@ -19,6 +25,10 @@ class MusicAdapter(private val musicList: List<MusicItem>):RecyclerView.Adapter<
         val currentItem = musicList[position]
 
         holder.textView.text = currentItem.musicName
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(currentItem)
+        }
 
     }
 
