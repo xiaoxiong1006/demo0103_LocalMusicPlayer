@@ -21,6 +21,21 @@ class MainActivity : AppCompatActivity(),MusicAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
+    override fun onStop() {
+        super.onStop()
+        jcplayer.createNotification()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        jcplayer.createNotification()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        jcplayer.kill()
+    }
+
     override fun onItemClick(item: JcAudio) {
        jcplayer.playAudio(item)
     }
